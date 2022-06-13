@@ -69,15 +69,10 @@ class Transacao {        // obj
     }
 
     static pagamentoSalario(contaOrigem, contaDestino, idPagamento, dataDoPagamento, valorDoSalario){
-        //  console.log(contaOrigem.saldo)
-        //  console.log(valorDoSalario)
-        //  console.log(contaDestino.saldo)
         if(contaOrigem instanceof Pessoa){
             if(valorDoSalario > 1000){
                 return { mensagem: "Seu limite máximo para este tipo de operação é de 1000, entre em contato com o banco!"} 
-            } 
-        }
-        if(contaOrigem.saldo >= valorDoSalario){
+            }else if(contaOrigem.saldo >= valorDoSalario){
             contaDestino.saldo += valorDoSalario;
             contaOrigem.saldo -= valorDoSalario;
             contaDestino.historico.push({
@@ -96,6 +91,7 @@ class Transacao {        // obj
         }
         return { mensagem: "Saldo insuficiente para realizar o pagamento!"}
     }
+    }      
 }
 
 const ChurrosVictor = new Empresa("01", "Vip", "16/05/2022", 156, 2798, 987654321, 1000, "Churros do Victor", "1011121314", "churrosVictor@email.com.br", 1234567890, "16/05/2022");
